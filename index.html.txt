@@ -1,48 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>InfoPortal - AI Powered Search</title>
-  <style>
-    body { font-family: Arial, sans-serif; background:#f7f7f7; text-align:center; padding:60px;}
-    .container { width:50%; margin:auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
-    input { width:70%; padding:12px; border-radius:8px; border:1px solid #ccc; }
-    button { padding:12px 18px; border:none; background:#007bff; color:#fff; border-radius:8px; cursor:pointer; }
-    button:hover { background:#005fcc; }
-    #output { 
-      margin-top:25px; padding:20px; 
-      background:#f1f1f1; border-radius:8px; min-height:50px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfoPortal - AI Assistant</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg,#1b2735,#090a0f);
+        color: #fff;
     }
-  </style>
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 60px;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    header h2 { margin: 0; font-size: 28px; letter-spacing: 1px;}
+    nav a {
+        color: #fff; text-decoration: none;
+        margin: 0 18px; font-size: 17px; transition: 0.3s;
+    }
+    nav a:hover { color: #00eaff; }
+
+    /* Hero Section */
+    .hero {
+        text-align: center;
+        padding: 120px 20px;
+    }
+    .hero h1 { font-size: 50px; font-weight: bold; }
+    .hero p { font-size: 19px; margin-top: 10px; color: #dcdcdc; }
+    .btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 14px 40px;
+        background:#00eaff;
+        color:#000;
+        font-size:19px;
+        border-radius:40px;
+        text-decoration:none;
+        font-weight: bold;
+        transition:0.3s;
+    }
+    .btn:hover { background:#fff; transform: scale(1.06); }
+
+    /* Feature Section */
+    .features {
+        margin: 100px auto;
+        text-align: center;
+        max-width: 1000px;
+    }
+    .features h2 { font-size: 36px; }
+    .cards {
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        margin-top:50px;
+    }
+    .card {
+        background: rgba(255,255,255,0.08);
+        width:280px;
+        padding:30px;
+        margin:18px;
+        border-radius:15px;
+        font-size:17px;
+        transition:.3s;
+    }
+    .card:hover { transform: translateY(-8px); }
+
+    /* Chatbot Section */
+    #chatbot-section {
+        padding: 90px 20px;
+        text-align: center;
+    }
+    #chatbot-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    .chat-container {
+        width: 90%;
+        max-width: 1150px;
+        margin: auto;
+        background: rgba(255,255,255,0.08);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        height: 750px;
+    }
+    .chat-container iframe {
+        width: 100%; height: 100%; border-radius: 12px;
+        border: none;
+    }
+
+    footer {
+        text-align:center;
+        padding:30px;
+        margin-top:70px;
+        border-top:1px solid rgba(255,255,255,0.15);
+    }
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <h1><b>InfoPortal</b></h1>
-    <p>AI powered chatbot for company resources</p>
 
-    <input type="text" id="query" placeholder="Type your question...">
-    <button onclick="askAI()">Search</button>
+<header>
+    <h2>InfoPortal</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#features">Services</a>
+        <a href="#chatbot-section">Chatbot</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
 
-    <p id="loading" style="display:none;">Processing...</p>
-    <div id="output">Your answer will appear here...</div>
-  </div>
+<section class="hero">
+    <h1>InfoPortal AI Assistant</h1>
+    <p>Instant AI support for information, queries, and services — anytime, anywhere.</p>
+    <a class="btn" href="#chatbot-section">Launch Chat Assistant</a>
+</section>
 
-<script>
-async function askAI(){
-    document.getElementById("loading").style.display = "block";
-    let userQuery = document.getElementById("query").value;
+<section class="features" id="features">
+    <h2>What InfoPortal Offers</h2>
+    <div class="cards">
+        <div class="card">⚡ Fast & intelligent responses</div>
+        <div class="card">📚 Multi-domain information access</div>
+        <div class="card">💬 Natural conversational experience</div>
+        <div class="card">🛠 Easy integration with external systems</div>
+    </div>
+</section>
 
-    let response = await fetch("YOUR_MAKE_WEBHOOK_URL", {  // paste your make webhook here later
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body:JSON.stringify({ query:userQuery })
-    });
+<!-- Embedded Dify Chatbot Section -->
+<section id="chatbot-section">
+    <h2>Interact with InfoPortal AI</h2>
+    <p>Ask anything — get instant results using our AI chatbot.</p>
 
-    let data = await response.json();
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("output").innerHTML = data.answer || "No response";
-}
-</script>
+    <div class="chat-container">
+        <iframe
+            src="https://udify.app/chatbot/RoJo9DM3TkkljJtV"
+            allow="microphone">
+        </iframe>
+    </div>
+</section>
+
+<footer>
+    © 2025 InfoPortal AI | Designed with ❤️ for Users
+</footer>
 
 </body>
 </html>
