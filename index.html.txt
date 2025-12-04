@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>InfoPortal - AI Powered Search</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f7f7f7; text-align:center; padding:60px;}
+    .container { width:50%; margin:auto; background:#fff; padding:30px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+    input { width:70%; padding:12px; border-radius:8px; border:1px solid #ccc; }
+    button { padding:12px 18px; border:none; background:#007bff; color:#fff; border-radius:8px; cursor:pointer; }
+    button:hover { background:#005fcc; }
+    #output { 
+      margin-top:25px; padding:20px; 
+      background:#f1f1f1; border-radius:8px; min-height:50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1><b>InfoPortal</b></h1>
+    <p>AI powered chatbot for company resources</p>
+
+    <input type="text" id="query" placeholder="Type your question...">
+    <button onclick="askAI()">Search</button>
+
+    <p id="loading" style="display:none;">Processing...</p>
+    <div id="output">Your answer will appear here...</div>
+  </div>
+
+<script>
+async function askAI(){
+    document.getElementById("loading").style.display = "block";
+    let userQuery = document.getElementById("query").value;
+
+    let response = await fetch("YOUR_MAKE_WEBHOOK_URL", {  // paste your make webhook here later
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({ query:userQuery })
+    });
+
+    let data = await response.json();
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("output").innerHTML = data.answer || "No response";
+}
+</script>
+
+</body>
+</html>
